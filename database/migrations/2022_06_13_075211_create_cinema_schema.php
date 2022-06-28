@@ -37,7 +37,48 @@ class CreateCinemaSchema extends Migration
      */
     public function up()
     {
-        throw new \Exception('implement in coding task 4, you can ignore this exception if you are just running the initial migrations.');
+        Schema::create('screens', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('shows', function (Blueprint $table) {
+            $table->id();
+            $table->string('show_name');
+            $table->time('start');
+            $table->time('end');
+            $table->timestamps();
+        });
+
+        Schema::create('screen_show', function (Blueprint $table) {
+            $table->id();
+            $table->integer('screen_id');
+            $table->integer('show_id');
+            $table->foreign('screen_id')->references('id')->on('screens');
+            $table->foreign('show_id')->references('id')->on('shows');
+            $table->timestamps();
+        });
+
+        Schema::create('movies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('screen_show_id');
+            $table->foreign('screen_show_id')->references('id')->on('screen_show');
+            $table->timestamps();
+        });
+
+        Schema::create('tickets', function (Blueprint $table) {
+            $table->id();
+            $table->string('ticket_category');
+            $table->decimal('price', 10, 2);
+            $table->integer('screen_show_id');
+            $table->foreign('screen_show_id')->references('id')->on('screen_show');
+            $table->timestamps();
+        });
+
+        
+        //throw new \Exception('implement in coding task 4, you can ignore this exception if you are just running the initial migrations.');
     }
 
     /**
