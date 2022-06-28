@@ -11,7 +11,6 @@ class ExampleTest extends TestCase
     public function testWarmupEvents() {
         $datePast = (new Carbon())->subYear()->setDay(21);
         $dateFuture = (new Carbon())->addYears(1);
-
         $response = $this->get('/warmupevents');
         $response->assertStatus(200)
             ->assertJsonCount(3)

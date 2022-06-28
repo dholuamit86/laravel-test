@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Date;
 class EventsController extends BaseController
 {
     public function getWarmupEvents() {
-        return Event::all();
+        return Event::latest()->take(3)->get();
     }
 
     /*
