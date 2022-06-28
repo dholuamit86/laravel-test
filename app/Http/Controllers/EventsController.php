@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
 
 class EventsController extends BaseController
@@ -101,7 +102,8 @@ class EventsController extends BaseController
      */
 
     public function getEventsWithWorkshops() {
-        throw new \Exception('implement in coding task 1');
+        return Event::with('workshops')->get();
+        //throw new \Exception('implement in coding task 1');
     }
 
 
@@ -180,6 +182,10 @@ class EventsController extends BaseController
      */
 
     public function getFutureEventsWithWorkshops() {
-        throw new \Exception('implement in coding task 2');
+        //$today = Carbon::today();
+        //$now = $today->format('Y-m-d');
+        //return Event::where('start', '>', $today)->with('workshops')->get();
+        return Event::with('futureEvents')->get();
+        //throw new \Exception('implement in coding task 2');
     }
 }
