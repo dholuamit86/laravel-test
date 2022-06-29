@@ -185,7 +185,7 @@ class EventsController extends BaseController
         //$today = Carbon::today();
         //$now = $today->format('Y-m-d');
         //return Event::where('start', '>', $today)->with('workshops')->get();
-        return Event::with('futureEvents')->get();
+        return Event::withCount('futureEvents')->get()->where('future_events_count', '>', 0);
         //throw new \Exception('implement in coding task 2');
     }
 }
